@@ -1,0 +1,9 @@
+Main.java:5: package com.sun.xml.internal.bind.marshaller does not exist
+import com.sun.xml.internal.bind.marshaller.CharacterEscapeHandler;  
+                                           ^
+Main.java:20: cannot find symbol
+symbol  : class CharacterEscapeHandler
+location: class Main
+  m.setProperty( "com.sun.xml.internal.bind.CharacterEscapeHandler", new CharacterEscapeHandler() {  
+                                                                         ^
+2 errors

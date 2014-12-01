@@ -1,0 +1,1349 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html dir='ltr' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<head>
+<link href='http://dl.dropbox.com/u/4926152/dp.SyntaxHighlighter/Styles/SyntaxHighlighter.css' rel='stylesheet' type='text/css'/>
+<script language='javascript' src='http://dl.dropbox.com/u/4926152/dp.SyntaxHighlighter/Uncompressed/shCore.js'></script>
+<script language='javascript' src='http://dl.dropbox.com/u/4926152/dp.SyntaxHighlighter/Uncompressed/shBrushJava.js'></script>
+<script language='javascript' src='http://dl.dropbox.com/u/4926152/dp.SyntaxHighlighter/Uncompressed/shBrushVb.js'></script>
+<script language='javascript' src='http://dl.dropbox.com/u/4926152/dp.SyntaxHighlighter/Uncompressed/shBrushXml.js'></script>
+<script language='javascript' src='http://dl.dropbox.com/u/4926152/dp.SyntaxHighlighter/Uncompressed/shBrushCss.js'></script>
+<script language='javascript' src='http://dl.dropbox.com/u/4926152/dp.SyntaxHighlighter/Uncompressed/shBrushJScript.js'></script>
+<meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+<script type="text/javascript">(function() { var b=window,f="chrome",g="tick",k="jstiming";(function(){function d(a){this.t={};this.tick=function(a,d,c){var e=void 0!=c?c:(new Date).getTime();this.t[a]=[e,d];if(void 0==c)try{b.console.timeStamp("CSI/"+a)}catch(h){}};this[g]("start",null,a)}var a;b.performance&&(a=b.performance.timing);var n=a?new d(a.responseStart):new d;b.jstiming={Timer:d,load:n};if(a){var c=a.navigationStart,h=a.responseStart;0<c&&h>=c&&(b[k].srt=h-c)}if(a){var e=b[k].load;0<c&&h>=c&&(e[g]("_wtsrt",void 0,c),e[g]("wtsrt_","_wtsrt",h),e[g]("tbsd_","wtsrt_"))}try{a=null,
+b[f]&&b[f].csi&&(a=Math.floor(b[f].csi().pageT),e&&0<c&&(e[g]("_tbnd",void 0,b[f].csi().startE),e[g]("tbnd_","_tbnd",c))),null==a&&b.gtbExternal&&(a=b.gtbExternal.pageT()),null==a&&b.external&&(a=b.external.pageT,e&&0<c&&(e[g]("_tbnd",void 0,b.external.startE),e[g]("tbnd_","_tbnd",c))),a&&(b[k].pt=a)}catch(p){}})();b.tickAboveFold=function(d){var a=0;if(d.offsetParent){do a+=d.offsetTop;while(d=d.offsetParent)}d=a;750>=d&&b[k].load[g]("aft")};var l=!1;function m(){l||(l=!0,b[k].load[g]("firstScrollTime"))}b.addEventListener?b.addEventListener("scroll",m,!1):b.attachEvent("onscroll",m);
+ })();</script>
+<meta content='blogger' name='generator'/>
+<link href='http://odedpeer.blogspot.com/favicon.ico' rel='icon' type='image/x-icon'/>
+<link href='http://odedpeer.blogspot.com/2010/07/jaxb-sun-and-how-to-marshal-cdata.html' rel='canonical'/>
+<link rel="alternate" type="application/atom+xml" title="Technical stuff - Atom" href="http://odedpeer.blogspot.com/feeds/posts/default" />
+<link rel="alternate" type="application/rss+xml" title="Technical stuff - RSS" href="http://odedpeer.blogspot.com/feeds/posts/default?alt=rss" />
+<link rel="service.post" type="application/atom+xml" title="Technical stuff - Atom" href="http://www.blogger.com/feeds/8023739875307409079/posts/default" />
+
+<link rel="alternate" type="application/atom+xml" title="Technical stuff - Atom" href="http://odedpeer.blogspot.com/feeds/8070129071131488886/comments/default" />
+<!--[if IE]> <script> (function() { var html5 = ("abbr,article,aside,audio,canvas,datalist,details," + "figure,footer,header,hgroup,mark,menu,meter,nav,output," + "progress,section,time,video").split(','); for (var i = 0; i < html5.length; i++) { document.createElement(html5[i]); } try { document.execCommand('BackgroundImageCache', false, true); } catch(e) {} })(); </script> <![endif]-->
+<title>Technical stuff: JAXB, Sun and how to marshal a CDATA element</title>
+<link type='text/css' rel='stylesheet' href='https://www.blogger.com/static/v1/widgets/3841957138-widget_css_bundle.css' />
+<link type='text/css' rel='stylesheet' href='https://www.blogger.com/dyn-css/authorization.css?targetBlogID=8023739875307409079&zx=6ff7065a-6117-4db6-91ff-7681dec8b006' />
+<style id='page-skin-1' type='text/css'><!--
+/*
+-----------------------------------------------
+Blogger Template Style
+Name:     Minima
+Date:     26 Feb 2004
+Updated by: Blogger Team
+----------------------------------------------- */
+/* Variable definitions
+====================
+<Variable name="bgcolor" description="Page Background Color"
+type="color" default="#fff">
+<Variable name="textcolor" description="Text Color"
+type="color" default="#333">
+<Variable name="linkcolor" description="Link Color"
+type="color" default="#58a">
+<Variable name="pagetitlecolor" description="Blog Title Color"
+type="color" default="#666">
+<Variable name="descriptioncolor" description="Blog Description Color"
+type="color" default="#999">
+<Variable name="titlecolor" description="Post Title Color"
+type="color" default="#c60">
+<Variable name="bordercolor" description="Border Color"
+type="color" default="#ccc">
+<Variable name="sidebarcolor" description="Sidebar Title Color"
+type="color" default="#999">
+<Variable name="sidebartextcolor" description="Sidebar Text Color"
+type="color" default="#666">
+<Variable name="visitedlinkcolor" description="Visited Link Color"
+type="color" default="#999">
+<Variable name="bodyfont" description="Text Font"
+type="font" default="normal normal 100% Georgia, Serif">
+<Variable name="headerfont" description="Sidebar Title Font"
+type="font"
+default="normal normal 78% 'Trebuchet MS',Trebuchet,Arial,Verdana,Sans-serif">
+<Variable name="pagetitlefont" description="Blog Title Font"
+type="font"
+default="normal normal 200% Georgia, Serif">
+<Variable name="descriptionfont" description="Blog Description Font"
+type="font"
+default="normal normal 78% 'Trebuchet MS', Trebuchet, Arial, Verdana, Sans-serif">
+<Variable name="postfooterfont" description="Post Footer Font"
+type="font"
+default="normal normal 78% 'Trebuchet MS', Trebuchet, Arial, Verdana, Sans-serif">
+<Variable name="startSide" description="Side where text starts in blog language"
+type="automatic" default="left">
+<Variable name="endSide" description="Side where text ends in blog language"
+type="automatic" default="right">
+*/
+/* Use this with templates/template-twocol.html */
+body {
+background:#ffffff;
+margin:0;
+color:#333333;
+font:x-small Georgia Serif;
+font-size/* */:/**/small;
+font-size: /**/small;
+text-align: center;
+}
+a:link {
+color:#5588aa;
+text-decoration:none;
+}
+a:visited {
+color:#999999;
+text-decoration:none;
+}
+a:hover {
+color:#cc6600;
+text-decoration:underline;
+}
+a img {
+border-width:0;
+}
+/* Header
+-----------------------------------------------
+*/
+#header-wrapper {
+width:660px;
+margin:0 auto 10px;
+border:1px solid #cccccc;
+}
+#header-inner {
+background-position: center;
+margin-left: auto;
+margin-right: auto;
+}
+#header {
+margin: 5px;
+border: 1px solid #cccccc;
+text-align: center;
+color:#666666;
+}
+#header h1 {
+margin:5px 5px 0;
+padding:15px 20px .25em;
+line-height:1.2em;
+text-transform:uppercase;
+letter-spacing:.2em;
+font: normal normal 200% Georgia, Serif;
+}
+#header a {
+color:#666666;
+text-decoration:none;
+}
+#header a:hover {
+color:#666666;
+}
+#header .description {
+margin:0 5px 5px;
+padding:0 20px 15px;
+max-width:700px;
+text-transform:uppercase;
+letter-spacing:.2em;
+line-height: 1.4em;
+font: normal normal 78% 'Trebuchet MS', Trebuchet, Arial, Verdana, Sans-serif;
+color: #999999;
+}
+#header img {
+margin-left: auto;
+margin-right: auto;
+}
+/* Outer-Wrapper
+----------------------------------------------- */
+#outer-wrapper {
+width: 1100px;
+margin:0 auto;
+padding:10px;
+text-align:left;
+font: normal normal 100% Georgia, Serif;
+}
+#main-wrapper {
+width: 810px;
+float: left;
+word-wrap: break-word; /* fix for long text breaking sidebar float in IE */
+overflow: hidden;     /* fix for long non-text content breaking IE sidebar float */
+}
+#sidebar-wrapper {
+width: 220px;
+float: right;
+word-wrap: break-word; /* fix for long text breaking sidebar float in IE */
+overflow: hidden;      /* fix for long non-text content breaking IE sidebar float */
+}
+/* Headings
+----------------------------------------------- */
+h2 {
+margin:1.5em 0 .75em;
+font:normal normal 78% 'Trebuchet MS',Trebuchet,Arial,Verdana,Sans-serif;
+line-height: 1.4em;
+text-transform:uppercase;
+letter-spacing:.2em;
+color:#999999;
+}
+/* Posts
+-----------------------------------------------
+*/
+h2.date-header {
+margin:1.5em 0 .5em;
+}
+.post {
+margin:.5em 0 1.5em;
+border-bottom:1px dotted #cccccc;
+padding-bottom:1.5em;
+}
+.post h3 {
+margin:.25em 0 0;
+padding:0 0 4px;
+font-size:140%;
+font-weight:normal;
+line-height:1.4em;
+color:#cc6600;
+}
+.post h3 a, .post h3 a:visited, .post h3 strong {
+display:block;
+text-decoration:none;
+color:#cc6600;
+font-weight:normal;
+}
+.post h3 strong, .post h3 a:hover {
+color:#333333;
+}
+.post-body {
+margin:0 0 .75em;
+line-height:1.6em;
+}
+.post-body blockquote {
+line-height:1.3em;
+}
+.post-footer {
+margin: .75em 0;
+color:#999999;
+text-transform:uppercase;
+letter-spacing:.1em;
+font: normal normal 78% 'Trebuchet MS', Trebuchet, Arial, Verdana, Sans-serif;
+line-height: 1.4em;
+}
+.comment-link {
+margin-left:.6em;
+}
+.post img, table.tr-caption-container {
+padding:4px;
+border:1px solid #cccccc;
+}
+.tr-caption-container img {
+border: none;
+padding: 0;
+}
+.post blockquote {
+margin:1em 20px;
+}
+.post blockquote p {
+margin:.75em 0;
+}
+/* Comments
+----------------------------------------------- */
+#comments h4 {
+margin:1em 0;
+font-weight: bold;
+line-height: 1.4em;
+text-transform:uppercase;
+letter-spacing:.2em;
+color: #999999;
+}
+#comments-block {
+margin:1em 0 1.5em;
+line-height:1.6em;
+}
+#comments-block .comment-author {
+margin:.5em 0;
+}
+#comments-block .comment-body {
+margin:.25em 0 0;
+}
+#comments-block .comment-footer {
+margin:-.25em 0 2em;
+line-height: 1.4em;
+text-transform:uppercase;
+letter-spacing:.1em;
+}
+#comments-block .comment-body p {
+margin:0 0 .75em;
+}
+.deleted-comment {
+font-style:italic;
+color:gray;
+}
+#blog-pager-newer-link {
+float: left;
+}
+#blog-pager-older-link {
+float: right;
+}
+#blog-pager {
+text-align: center;
+}
+.feed-links {
+clear: both;
+line-height: 2.5em;
+}
+/* Sidebar Content
+----------------------------------------------- */
+.sidebar {
+color: #666666;
+line-height: 1.5em;
+}
+.sidebar ul {
+list-style:none;
+margin:0 0 0;
+padding:0 0 0;
+}
+.sidebar li {
+margin:0;
+padding-top:0;
+padding-right:0;
+padding-bottom:.25em;
+padding-left:15px;
+text-indent:-15px;
+line-height:1.5em;
+}
+.sidebar .widget, .main .widget {
+border-bottom:1px dotted #cccccc;
+margin:0 0 1.5em;
+padding:0 0 1.5em;
+}
+.main .Blog {
+border-bottom-width: 0;
+}
+/* Profile
+----------------------------------------------- */
+.profile-img {
+float: left;
+margin-top: 0;
+margin-right: 5px;
+margin-bottom: 5px;
+margin-left: 0;
+padding: 4px;
+border: 1px solid #cccccc;
+}
+.profile-data {
+margin:0;
+text-transform:uppercase;
+letter-spacing:.1em;
+font: normal normal 78% 'Trebuchet MS', Trebuchet, Arial, Verdana, Sans-serif;
+color: #999999;
+font-weight: bold;
+line-height: 1.6em;
+}
+.profile-datablock {
+margin:.5em 0 .5em;
+}
+.profile-textblock {
+margin: 0.5em 0;
+line-height: 1.6em;
+}
+.profile-link {
+font: normal normal 78% 'Trebuchet MS', Trebuchet, Arial, Verdana, Sans-serif;
+text-transform: uppercase;
+letter-spacing: .1em;
+}
+/* Footer
+----------------------------------------------- */
+#footer {
+width:660px;
+clear:both;
+margin:0 auto;
+padding-top:15px;
+line-height: 1.6em;
+text-transform:uppercase;
+letter-spacing:.1em;
+text-align: center;
+}
+
+--></style>
+<script type="text/javascript">var a="indexOf",b="&m=1",e="(^|&)m=",f="?",g="?m=1";function h(){var c=window.location.href,d=c.split(f);switch(d.length){case 1:return c+g;case 2:return 0<=d[1].search(e)?null:c+b;default:return null}}var k=navigator.userAgent;if(-1!=k[a]("Mobile")&&-1!=k[a]("WebKit")&&-1==k[a]("iPad")||-1!=k[a]("Opera Mini")||-1!=k[a]("IEMobile")){var l=h();l&&window.location.replace(l)};
+</script><script type="text/javascript">
+if (window.jstiming) window.jstiming.load.tick('headEnd');
+</script></head>
+<body>
+<div class='navbar section' id='navbar'><div class='widget Navbar' id='Navbar1'><script type="text/javascript">
+    function setAttributeOnload(object, attribute, val) {
+      if(window.addEventListener) {
+        window.addEventListener('load',
+          function(){ object[attribute] = val; }, false);
+      } else {
+        window.attachEvent('onload', function(){ object[attribute] = val; });
+      }
+    }
+  </script>
+<div id="navbar-iframe-container"></div>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+<script type="text/javascript">
+        gapi.load("gapi.iframes:gapi.iframes.style.bubble", function() {
+          if (gapi.iframes && gapi.iframes.getContext) {
+            gapi.iframes.getContext().openChild({
+                url: 'https://www.blogger.com/navbar.g?targetBlogID\758023739875307409079\46blogName\75Technical+stuff\46publishMode\75PUBLISH_MODE_BLOGSPOT\46navbarType\75BLUE\46layoutType\75LAYOUTS\46searchRoot\75http://odedpeer.blogspot.com/search\46blogLocale\75en\46v\0752\46homepageUrl\75http://odedpeer.blogspot.com/\46targetPostID\758070129071131488886\46blogPostOrPageUrl\75http://odedpeer.blogspot.com/2010/07/jaxb-sun-and-how-to-marshal-cdata.html\46vt\75-5488748867737253119',
+                where: document.getElementById("navbar-iframe-container"),
+                id: "navbar-iframe"
+            });
+          }
+        });
+      </script><script type="text/javascript">
+(function() {
+var script = document.createElement('script');
+script.type = 'text/javascript';
+script.src = '//pagead2.googlesyndication.com/pagead/js/google_top_exp.js';
+var head = document.getElementsByTagName('head')[0];
+if (head) {
+head.appendChild(script);
+}})();
+</script>
+</div></div>
+<div id='outer-wrapper'><div id='wrap2'>
+<!-- skip links for text browsers -->
+<span id='skiplinks' style='display:none;'>
+<a href='#main'>skip to main </a> |
+      <a href='#sidebar'>skip to sidebar</a>
+</span>
+<div id='header-wrapper'>
+<div class='header section' id='header'><div class='widget Header' id='Header1'>
+<div id='header-inner'>
+<div class='titlewrapper'>
+<h1 class='title'>
+<a href='http://odedpeer.blogspot.com/'>Technical stuff</a>
+</h1>
+</div>
+<div class='descriptionwrapper'>
+<p class='description'><span>
+</span></p>
+</div>
+</div>
+</div></div>
+</div>
+<div id='content-wrapper'>
+<div id='crosscol-wrapper' style='text-align:center'>
+<div class='crosscol section' id='crosscol'></div>
+</div>
+<div id='main-wrapper'>
+<div class='main section' id='main'><div class='widget Blog' id='Blog1'>
+<div class='blog-posts hfeed'>
+<!-- google_ad_section_start(name=default) -->
+
+          <div class="date-outer">
+        
+<h2 class='date-header'><span>Tuesday, July 6, 2010</span></h2>
+
+          <div class="date-posts">
+        
+<div class='post-outer'>
+<div class='post hentry'>
+<a name='8070129071131488886'></a>
+<h3 class='post-title entry-title'>
+<a href='http://odedpeer.blogspot.com/2010/07/jaxb-sun-and-how-to-marshal-cdata.html'>JAXB, Sun and how to marshal a CDATA element</a>
+</h3>
+<div class='post-header'>
+<div class='post-header-line-1'></div>
+</div>
+<div class='post-body entry-content'>
+According to <a href="https://jaxb.dev.java.net/faq/index.html#marshalling_cdata">https://jaxb.dev.java.net/faq/index.html#marshalling_cdata</a> there is no direct support in marshalling CDATA blocks, this is vendor specific.<br />
+I'll describe how this is done when using the built-in Sun implementation by an example.<br />
+<br />
+<br />
+Suppose this is my JAXB annotated class:<br />
+<pre class="java" cols="120" name="code">package org.oded;
+
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.*;
+
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Item
+{
+ @XmlAttribute public int id;
+ 
+ public String text;
+}
+</pre><br />
+Next I run the Main class:<br />
+<pre class="java" cols="120" name="code">package org.oded;
+
+import java.io.*;
+
+import javax.xml.bind.*;
+
+import com.sun.xml.internal.bind.marshaller.CharacterEscapeHandler;
+
+public class Main
+{
+ public static void main( String[] args ) throws Exception
+ {
+  Item i1 = new Item();
+  i1.text = "hello";
+  i1.id = 1;
+  
+  Item i2 = new Item();
+  i2.text = "<code><helloWorld/></code>";
+  i2.id = 2;
+    
+  Marshaller m = JAXBContext.newInstance( Item.class ).createMarshaller();
+  
+  m.marshal( i1, new OutputStreamWriter( System.out ) );
+  System.out.println();
+  m.marshal( i2, new OutputStreamWriter( System.out ) );
+ }
+}
+</pre><br />
+The output is:<br />
+<pre class="xml" cols="120" name="code"><?xml version="1.0" encoding="UTF-8" standalone="yes"?><item id="1"><text>hello</text></item>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><item id="2"><text>&lt;code&gt;&lt;helloWorld/&gt;&lt;/code&gt;</text></item>
+</pre><br />
+Now suppose I want to wrap the XML value of <i>text</i> in a CDATA element and avoid the escaping, I need to add specify an Adapter for <i>text</i> to surround the value in a CDATA element in the following way:<br />
+<br />
+<pre class="java" cols="120" name="code">package org.oded;
+
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.*;
+
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Item
+{
+ @XmlAttribute public int id;
+ 
+ @XmlJavaTypeAdapter(value=Adapter.class) 
+ public String text;
+ 
+ private static class Adapter extends XmlAdapter<String, String>
+ {
+
+  @Override
+  public String marshal( String v ) throws Exception
+  {
+   return "&lt;![CDATA[" + v + "]]&gt;";
+  }
+
+  @Override
+  public String unmarshal( String v ) throws Exception
+  {
+   return v;
+  }
+  
+ }
+}
+</pre><br />
+Now tell the Marshaller, in a Sun-specific way, not to escape the value of <i>text</i>:<br />
+<pre class="java" cols="120" name="code">package org.oded;
+
+import java.io.*;
+
+import javax.xml.bind.*;
+
+import com.sun.xml.internal.bind.marshaller.CharacterEscapeHandler;
+
+public class Main
+{
+ public static void main( String[] args ) throws Exception
+ {
+  Item i1 = new Item();
+  i1.text = "hello";
+  i1.id = 1;
+  
+  Item i2 = new Item();
+  i2.text = "<code><helloWorld/></code>";
+  i2.id = 2;
+    
+  Marshaller m = JAXBContext.newInstance( Item.class ).createMarshaller();
+  m.setProperty( "com.sun.xml.internal.bind.characterEscapeHandler", new CharacterEscapeHandler() {
+   @Override
+   public void escape( char[] ac, int i, int j, boolean flag, Writer writer ) throws IOException
+   {
+    // do not escape
+    writer.write( ac, i, j );
+   }
+  });
+  
+  m.marshal( i1, new OutputStreamWriter( System.out ) );
+  System.out.println();
+  m.marshal( i2, new OutputStreamWriter( System.out ) );
+ }
+}
+</pre><br />
+Now the output is:<br />
+<pre class="xml" cols="120" name="code"><?xml version="1.0" encoding="UTF-8" standalone="yes"?><item id="1"><text>&lt;![CDATA[hello]]&gt;</text></item>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><item id="2"><text>&lt;![CDATA[<code><helloWorld/></code>]]&gt;</text></item>
+</pre>
+<div style='clear: both;'></div>
+</div>
+<div class='post-footer'>
+<div class='post-footer-line post-footer-line-1'><span class='post-author vcard'>
+Posted by
+<span class='fn'>Oded Peer</span>
+</span>
+<span class='post-timestamp'>
+at
+<a class='timestamp-link' href='http://odedpeer.blogspot.com/2010/07/jaxb-sun-and-how-to-marshal-cdata.html' rel='bookmark' title='permanent link'><abbr class='published' title='2010-07-06T09:33:00-07:00'>9:33 AM</abbr></a>
+</span>
+<span class='post-comment-link'>
+</span>
+<span class='post-icons'>
+<span class='item-action'>
+<a href='http://www.blogger.com/email-post.g?blogID=8023739875307409079&postID=8070129071131488886' title='Email Post'>
+<img alt='' class='icon-action' height='13' src='http://www.blogger.com/img/icon18_email.gif' width='18'/>
+</a>
+</span>
+<span class='item-control blog-admin pid-1886755827'>
+<a href='http://www.blogger.com/post-edit.g?blogID=8023739875307409079&postID=8070129071131488886&from=pencil' title='Edit Post'>
+<img alt='' class='icon-action' height='18' src='http://img2.blogblog.com/img/icon18_edit_allbkg.gif' width='18'/>
+</a>
+</span>
+</span>
+<span class='post-backlinks post-comment-link'>
+</span>
+</div>
+<div class='post-footer-line post-footer-line-2'><span class='post-labels'>
+Labels:
+<a href='http://odedpeer.blogspot.com/search/label/Java' rel='tag'>Java</a>,
+<a href='http://odedpeer.blogspot.com/search/label/JAXB' rel='tag'>JAXB</a>,
+<a href='http://odedpeer.blogspot.com/search/label/marshal' rel='tag'>marshal</a>,
+<a href='http://odedpeer.blogspot.com/search/label/XML' rel='tag'>XML</a>
+</span>
+</div>
+<div class='post-footer-line post-footer-line-3'><span class='post-location'>
+</span>
+</div>
+</div>
+</div>
+<div class='comments' id='comments'>
+<a name='comments'></a>
+<h4>9 comments:</h4>
+<div class='comments-content'>
+<script async='async' src='//www.blogblog.com/dynamicviews/4224c15c4e7c9321/js/comments.js' type='text/javascript'></script>
+<script type='text/javascript'>
+    (function() {
+      var items = [{'id': '2514147548483916094', 'body': 'This post helped me a lot.', 'timestamp': '1296657443670', 'permalink': 'http://odedpeer.blogspot.com/2010/07/jaxb-sun-and-how-to-marshal-cdata.html?showComment\0751296657443670#c2514147548483916094', 'author': {'name': 'Anonymous', 'avatarUrl': 'http://img1.blogblog.com/img/blank.gif', 'profileUrl': ''}, 'displayTime': 'February 2, 2011 at 6:37 AM', 'deleteclass': 'item-control blog-admin pid-24803702'}, {'id': '4266665568155913339', 'body': 'Very nice. Clean.', 'timestamp': '1302202829000', 'permalink': 'http://odedpeer.blogspot.com/2010/07/jaxb-sun-and-how-to-marshal-cdata.html?showComment\0751302202829000#c4266665568155913339', 'author': {'name': 'Anonymous', 'avatarUrl': 'http://img1.blogblog.com/img/blank.gif', 'profileUrl': ''}, 'displayTime': 'April 7, 2011 at 12:00 PM', 'deleteclass': 'item-control blog-admin pid-505876787'}, {'id': '1798484554247783143', 'body': 'thanks... easy to understand... i implemented the above and got the below exception: \74br /\76\74br /\76javax.xml.bind.PropertyException: name: com.sun.xml.internal.bind.marshaller.characterEscapeHandler value: test.ObjectToXML$1@44118bb\74br /\76\74br /\76please can you advise what could be the problem?\74br /\76found this post that with the same problem...:\74br /\76http://metro.1045641.n5.nabble.com/Implementing-CharacterEscapeHandler-using-JDK6-td1063492.html', 'timestamp': '1304076530490', 'permalink': 'http://odedpeer.blogspot.com/2010/07/jaxb-sun-and-how-to-marshal-cdata.html?showComment\0751304076530490#c1798484554247783143', 'author': {'name': 'Anonymous', 'avatarUrl': 'http://img1.blogblog.com/img/blank.gif', 'profileUrl': ''}, 'displayTime': 'April 29, 2011 at 4:28 AM', 'deleteclass': 'item-control blog-admin pid-1242094689'}, {'id': '4657053082534933430', 'body': 'I looked at the source of the exception (http://grepcode.com/file/repository.grepcode.com/java/root/jdk/openjdk/6-b14/com/sun/xml/internal/bind/v2/runtime/MarshallerImpl.java) and it seems that your class \46quot;test.ObjectToXML\46quot; does not implement \46quot;com.sun.xml.internal.bind.marshaller.CharacterEscapeHandler\46quot;', 'timestamp': '1304245451342', 'permalink': 'http://odedpeer.blogspot.com/2010/07/jaxb-sun-and-how-to-marshal-cdata.html?showComment\0751304245451342#c4657053082534933430', 'author': {'name': 'Oded Peer', 'avatarUrl': 'http://img2.blogblog.com/img/b16-rounded.gif', 'profileUrl': 'http://www.blogger.com/profile/13092888750242228106'}, 'displayTime': 'May 1, 2011 at 3:24 AM', 'deleteclass': 'item-control blog-admin pid-1886755827'}, {'id': '5303960485862970898', 'body': 'try using \74br /\76   \74br /\76m.setProperty( CharacterEscapeHandler.class.getName(), new CharacterEscapeHandler() {    \74br /\76  public void escape(char[] ac, int i, int j, boolean flag,\74br /\76   Writer writer) throws IOException {\74br /\76     // TODO Auto-generated method stub\74br /\76     writer.write( ac, i, j );  \74br /\76     \74br /\76    }\74br /\76   });', 'timestamp': '1324580118280', 'permalink': 'http://odedpeer.blogspot.com/2010/07/jaxb-sun-and-how-to-marshal-cdata.html?showComment\0751324580118280#c5303960485862970898', 'author': {'name': 'Anonymous', 'avatarUrl': 'http://img1.blogblog.com/img/blank.gif', 'profileUrl': ''}, 'displayTime': 'December 22, 2011 at 10:55 AM', 'deleteclass': 'item-control blog-admin pid-1845109059'}, {'id': '822063223336777980', 'body': 'Nice post. But could not find out jar contains class you used:\74br /\76com.sun.xml.internal.bind.marshaller.CharacterEscapeHandler\74br /\76\74br /\76Also, the compiler complains about:\74br /\76private static class Adapter extends XmlAdapter \74br /\76\74br /\76Should it be like below?\74br /\76private static class Adapter extends XmlAdapter', 'timestamp': '1341515783199', 'permalink': 'http://odedpeer.blogspot.com/2010/07/jaxb-sun-and-how-to-marshal-cdata.html?showComment\0751341515783199#c822063223336777980', 'author': {'name': 'bbsun', 'avatarUrl': 'http://img2.blogblog.com/img/b16-rounded.gif', 'profileUrl': 'http://www.blogger.com/profile/11036936175744509967'}, 'displayTime': 'July 5, 2012 at 12:16 PM', 'deleteclass': 'item-control blog-admin pid-189836809'}, {'id': '9084212784628192171', 'body': 'Very useful thank you very much. \74br /\76About the errors above with the CharacterEscapeHandler, plase have a look here: http://stackoverflow.com/questions/860187/access-restriction-on-class-due-to-restriction-on-required-library-rt-jar', 'timestamp': '1351268172422', 'permalink': 'http://odedpeer.blogspot.com/2010/07/jaxb-sun-and-how-to-marshal-cdata.html?showComment\0751351268172422#c9084212784628192171', 'author': {'name': 'Anonymous', 'avatarUrl': 'http://img1.blogblog.com/img/blank.gif', 'profileUrl': ''}, 'displayTime': 'October 26, 2012 at 9:16 AM', 'deleteclass': 'item-control blog-admin pid-1379720335'}, {'id': '4586962102248548277', 'body': 'Unfortunately, your example is broken: Your adapter does not handle CDATA end tags ]]\46gt; properly. This breaks the generated XML if that string is contained in the input.\74br /\76\74br /\76More severely, the CharacterEscapeHandler instance turns off escaping completely for all tags. As a consequence you _must_ use CDATA tags for all members that might contain special charactes like (greater than).\74br /\76\74br /\76Unfortunately, there there seems to be no feasible way to conveniently use escaping for some tags and CDATA for others with your approach.\74br /\76\74br /\076', 'timestamp': '1357811192239', 'permalink': 'http://odedpeer.blogspot.com/2010/07/jaxb-sun-and-how-to-marshal-cdata.html?showComment\0751357811192239#c4586962102248548277', 'author': {'name': 'Dirk Dittert', 'avatarUrl': 'http://img2.blogblog.com/img/b16-rounded.gif', 'profileUrl': 'http://www.blogger.com/profile/03770297381207259923'}, 'displayTime': 'January 10, 2013 at 1:46 AM', 'deleteclass': 'item-control blog-admin pid-231768229'}, {'id': '5556740398651546597', 'body': 'Thanks, great post. Really usefull!', 'timestamp': '1366204123562', 'permalink': 'http://odedpeer.blogspot.com/2010/07/jaxb-sun-and-how-to-marshal-cdata.html?showComment\0751366204123562#c5556740398651546597', 'author': {'name': 'Anonymous', 'avatarUrl': 'http://img1.blogblog.com/img/blank.gif', 'profileUrl': ''}, 'displayTime': 'April 17, 2013 at 6:08 AM', 'deleteclass': 'item-control blog-admin pid-711592853'}];
+      var msgs = {'loadMore': 'Load more...', 'loading': 'Loading...', 'loaded': 'No more!', 'addComment': 'Add comment', 'reply': 'Reply', 'delete': 'Delete'};
+      var config = {'blogId': '8023739875307409079', 'postId': '8070129071131488886', 'feed': 'http://odedpeer.blogspot.com/feeds/8070129071131488886/comments/default', 'authorName': 'Oded Peer', 'authorUrl': 'http://www.blogger.com/profile/13092888750242228106', 'baseUri': 'http://www.blogger.com', 'maxThreadDepth': 2};
+
+// <![CDATA[
+      var cursor = null;
+      if (items && items.length > 0) {
+        cursor = parseInt(items[items.length - 1].timestamp) + 1;
+      }
+
+      var bodyFromEntry = function(entry) {
+        if (entry.gd$extendedProperty) {
+          for (var k in entry.gd$extendedProperty) {
+            if (entry.gd$extendedProperty[k].name == 'blogger.contentRemoved') {
+              return '<span class="deleted-comment">' + entry.content.$t + '</span>';
+            }
+          }
+        }
+        return entry.content.$t;
+      }
+
+      var parse = function(data) {
+        cursor = null;
+        var comments = [];
+        if (data && data.feed && data.feed.entry) {
+          for (var i = 0, entry; entry = data.feed.entry[i]; i++) {
+            var comment = {};
+            // comment ID, parsed out of the original id format
+            var id = /blog-(\d+).post-(\d+)/.exec(entry.id.$t);
+            comment.id = id ? id[2] : null;
+            comment.body = bodyFromEntry(entry);
+            comment.timestamp = Date.parse(entry.published.$t) + '';
+            if (entry.author && entry.author.constructor === Array) {
+              var auth = entry.author[0];
+              if (auth) {
+                comment.author = {
+                  name: (auth.name ? auth.name.$t : undefined),
+                  profileUrl: (auth.uri ? auth.uri.$t : undefined),
+                  avatarUrl: (auth.gd$image ? auth.gd$image.src : undefined)
+                };
+              }
+            }
+            if (entry.link) {
+              if (entry.link[2]) {
+                comment.link = comment.permalink = entry.link[2].href;
+              }
+              if (entry.link[3]) {
+                var pid = /.*comments\/default\/(\d+)\?.*/.exec(entry.link[3].href);
+                if (pid && pid[1]) {
+                  comment.parentId = pid[1];
+                }
+              }
+            }
+            comment.deleteclass = 'item-control blog-admin';
+            if (entry.gd$extendedProperty) {
+              for (var k in entry.gd$extendedProperty) {
+                if (entry.gd$extendedProperty[k].name == 'blogger.itemClass') {
+                  comment.deleteclass += ' ' + entry.gd$extendedProperty[k].value;
+                } else if (entry.gd$extendedProperty[k].name == 'blogger.displayTime') {
+                  comment.displayTime = entry.gd$extendedProperty[k].value;
+                }
+              }
+            }
+            comments.push(comment);
+          }
+        }
+        return comments;
+      };
+
+      var paginator = function(callback) {
+        if (hasMore()) {
+          var url = config.feed + '?alt=json&v=2&orderby=published&reverse=false&max-results=50';
+          if (cursor) {
+            url += '&published-min=' + new Date(cursor).toISOString();
+          }
+          window.bloggercomments = function(data) {
+            var parsed = parse(data);
+            cursor = parsed.length < 50 ? null
+                : parseInt(parsed[parsed.length - 1].timestamp) + 1
+            callback(parsed);
+            window.bloggercomments = null;
+          }
+          url += '&callback=bloggercomments';
+          var script = document.createElement('script');
+          script.type = 'text/javascript';
+          script.src = url;
+          document.getElementsByTagName('head')[0].appendChild(script);
+        }
+      };
+      var hasMore = function() {
+        return !!cursor;
+      };
+      var getMeta = function(key, comment) {
+        if ('iswriter' == key) {
+          var matches = !!comment.author
+              && comment.author.name == config.authorName
+              && comment.author.profileUrl == config.authorUrl;
+          return matches ? 'true' : '';
+        } else if ('deletelink' == key) {
+          return config.baseUri + '/delete-comment.g?blogID='
+               + config.blogId + '&postID=' + comment.id;
+        } else if ('deleteclass' == key) {
+          return comment.deleteclass;
+        }
+        return '';
+      };
+
+      var replybox = null;
+      var replyUrlParts = null;
+      var replyParent = undefined;
+
+      var onReply = function(commentId, domId) {
+        if (replybox == null) {
+          // lazily cache replybox, and adjust to suit this style:
+          replybox = document.getElementById('comment-editor');
+          if (replybox != null) {
+            replybox.height = '250px';
+            replybox.style.display = 'block';
+            replyUrlParts = replybox.src.split('#');
+          }
+        }
+        if (replybox && (commentId !== replyParent)) {
+          document.getElementById(domId).insertBefore(replybox, null);
+          replybox.src = replyUrlParts[0]
+              + (commentId ? '&parentID=' + commentId : '')
+              + '#' + replyUrlParts[1];
+          replyParent = commentId;
+        }
+      };
+
+      var hash = (window.location.hash || '#').substring(1);
+      var startThread, targetComment;
+      if (/^comment-form_/.test(hash)) {
+        startThread = hash.substring('comment-form_'.length);
+      } else if (/^c[0-9]+$/.test(hash)) {
+        targetComment = hash.substring(1);
+      }
+
+      // Configure commenting API:
+      var configJso = {
+        'maxDepth': config.maxThreadDepth
+      };
+      var provider = {
+        'id': config.postId,
+        'data': items,
+        'loadNext': paginator,
+        'hasMore': hasMore,
+        'getMeta': getMeta,
+        'onReply': onReply,
+        'rendered': true,
+        'initComment': targetComment,
+        'initReplyThread': startThread,
+        'config': configJso,
+        'messages': msgs
+      };
+
+      var render = function() {
+        if (window.goog && window.goog.comments) {
+          var holder = document.getElementById('comment-holder');
+          window.goog.comments.render(holder, provider);
+        }
+      };
+
+      // render now, or queue to render when library loads:
+      if (window.goog && window.goog.comments) {
+        render();
+      } else {
+        window.goog = window.goog || {};
+        window.goog.comments = window.goog.comments || {};
+        window.goog.comments.loadQueue = window.goog.comments.loadQueue || [];
+        window.goog.comments.loadQueue.push(render);
+      }
+    })();
+// ]]>
+</script>
+<div id='comment-holder'>
+<div id='bc_0_10C' kind='c'><div id='bc_0_10CT'><div id='bc_0_9T' class='comment-thread' kind='r'  t='0' u='0'><ol id='bc_0_9TB'><li id='bc_0_0B' class='comment' kind='b'><div class='avatar-image-container'><img src='http://img1.blogblog.com/img/anon36.png'></img></div><div id='c2514147548483916094' class='comment-block'><div id='bc_0_0M' class='comment-header' kind='m'><cite class='user'>Anonymous</cite><span class='icon user'></span><span class='datetime secondary-text'><a rel='nofollow' href='http://odedpeer.blogspot.com/2010/07/jaxb-sun-and-how-to-marshal-cdata.html?showComment=1296657443670#c2514147548483916094'>February 2, 2011 at 6:37 AM</a></span></div><p id='bc_0_0MC' class='comment-content'>This post helped me a lot.</p><span id='bc_0_0MN' class='comment-actions secondary-text' kind='m'><a kind='i' href='javascript:;' target='_self' o='r'>Reply</a><span class='item-control blog-admin pid-24803702'><a o='d' target='_self' href='http://www.blogger.com/delete-comment.g?blogID=8023739875307409079&amp;postID=2514147548483916094'>Delete</a></span></span></div><div id='bc_0_0BR' class='comment-replies'></div><div id='bc_0_0B_box' class='comment-replybox-single'></div></li><li id='bc_0_1B' class='comment' kind='b'><div class='avatar-image-container'><img src='http://img1.blogblog.com/img/anon36.png'></img></div><div id='c4266665568155913339' class='comment-block'><div id='bc_0_1M' class='comment-header' kind='m'><cite class='user'>Anonymous</cite><span class='icon user'></span><span class='datetime secondary-text'><a rel='nofollow' href='http://odedpeer.blogspot.com/2010/07/jaxb-sun-and-how-to-marshal-cdata.html?showComment=1302202829000#c4266665568155913339'>April 7, 2011 at 12:00 PM</a></span></div><p id='bc_0_1MC' class='comment-content'>Very nice. Clean.</p><span id='bc_0_1MN' class='comment-actions secondary-text' kind='m'><a kind='i' href='javascript:;' target='_self' o='r'>Reply</a><span class='item-control blog-admin pid-505876787'><a o='d' target='_self' href='http://www.blogger.com/delete-comment.g?blogID=8023739875307409079&amp;postID=4266665568155913339'>Delete</a></span></span></div><div id='bc_0_1BR' class='comment-replies'></div><div id='bc_0_1B_box' class='comment-replybox-single'></div></li><li id='bc_0_2B' class='comment' kind='b'><div class='avatar-image-container'><img src='http://img1.blogblog.com/img/anon36.png'></img></div><div id='c1798484554247783143' class='comment-block'><div id='bc_0_2M' class='comment-header' kind='m'><cite class='user'>Anonymous</cite><span class='icon user'></span><span class='datetime secondary-text'><a rel='nofollow' href='http://odedpeer.blogspot.com/2010/07/jaxb-sun-and-how-to-marshal-cdata.html?showComment=1304076530490#c1798484554247783143'>April 29, 2011 at 4:28 AM</a></span></div><p id='bc_0_2MC' class='comment-content'>thanks... easy to understand... i implemented the above and got the below exception: <br /><br />javax.xml.bind.PropertyException: name: com.sun.xml.internal.bind.marshaller.characterEscapeHandler value: test.ObjectToXML$1@44118bb<br /><br />please can you advise what could be the problem?<br />found this post that with the same problem...:<br />http://metro.1045641.n5.nabble.com/Implementing-CharacterEscapeHandler-using-JDK6-td1063492.html</p><span id='bc_0_2MN' class='comment-actions secondary-text' kind='m'><a kind='i' href='javascript:;' target='_self' o='r'>Reply</a><span class='item-control blog-admin pid-1242094689'><a o='d' target='_self' href='http://www.blogger.com/delete-comment.g?blogID=8023739875307409079&amp;postID=1798484554247783143'>Delete</a></span></span></div><div id='bc_0_2BR' class='comment-replies'></div><div id='bc_0_2B_box' class='comment-replybox-single'></div></li><li id='bc_0_3B' class='comment' kind='b'><div class='avatar-image-container'><img src='http://img2.blogblog.com/img/b36-rounded.png'></img></div><div id='c4657053082534933430' class='comment-block'><div id='bc_0_3M' class='comment-header' kind='m'><cite class='user blog-author'><a rel='nofollow' href='http://www.blogger.com/profile/13092888750242228106'>Oded Peer</a></cite><span class='icon user blog-author'></span><span class='datetime secondary-text'><a rel='nofollow' href='http://odedpeer.blogspot.com/2010/07/jaxb-sun-and-how-to-marshal-cdata.html?showComment=1304245451342#c4657053082534933430'>May 1, 2011 at 3:24 AM</a></span></div><p id='bc_0_3MC' class='comment-content'>I looked at the source of the exception (http://grepcode.com/file/repository.grepcode.com/java/root/jdk/openjdk/6-b14/com/sun/xml/internal/bind/v2/runtime/MarshallerImpl.java) and it seems that your class &quot;test.ObjectToXML&quot; does not implement &quot;com.sun.xml.internal.bind.marshaller.CharacterEscapeHandler&quot;</p><span id='bc_0_3MN' class='comment-actions secondary-text' kind='m'><a kind='i' href='javascript:;' target='_self' o='r'>Reply</a><span class='item-control blog-admin pid-1886755827'><a o='d' target='_self' href='http://www.blogger.com/delete-comment.g?blogID=8023739875307409079&amp;postID=4657053082534933430'>Delete</a></span></span></div><div id='bc_0_3BR' class='comment-replies'></div><div id='bc_0_3B_box' class='comment-replybox-single'></div></li><li id='bc_0_4B' class='comment' kind='b'><div class='avatar-image-container'><img src='http://img1.blogblog.com/img/anon36.png'></img></div><div id='c5303960485862970898' class='comment-block'><div id='bc_0_4M' class='comment-header' kind='m'><cite class='user'>Anonymous</cite><span class='icon user'></span><span class='datetime secondary-text'><a rel='nofollow' href='http://odedpeer.blogspot.com/2010/07/jaxb-sun-and-how-to-marshal-cdata.html?showComment=1324580118280#c5303960485862970898'>December 22, 2011 at 10:55 AM</a></span></div><p id='bc_0_4MC' class='comment-content'>try using <br />   <br />m.setProperty( CharacterEscapeHandler.class.getName(), new CharacterEscapeHandler() {    <br />  public void escape(char[] ac, int i, int j, boolean flag,<br />   Writer writer) throws IOException {<br />     // TODO Auto-generated method stub<br />     writer.write( ac, i, j );  <br />     <br />    }<br />   });</p><span id='bc_0_4MN' class='comment-actions secondary-text' kind='m'><a kind='i' href='javascript:;' target='_self' o='r'>Reply</a><span class='item-control blog-admin pid-1845109059'><a o='d' target='_self' href='http://www.blogger.com/delete-comment.g?blogID=8023739875307409079&amp;postID=5303960485862970898'>Delete</a></span></span></div><div id='bc_0_4BR' class='comment-replies'></div><div id='bc_0_4B_box' class='comment-replybox-single'></div></li><li id='bc_0_5B' class='comment' kind='b'><div class='avatar-image-container'><img src='http://img2.blogblog.com/img/b36-rounded.png'></img></div><div id='c822063223336777980' class='comment-block'><div id='bc_0_5M' class='comment-header' kind='m'><cite class='user'><a rel='nofollow' href='http://www.blogger.com/profile/11036936175744509967'>bbsun</a></cite><span class='icon user'></span><span class='datetime secondary-text'><a rel='nofollow' href='http://odedpeer.blogspot.com/2010/07/jaxb-sun-and-how-to-marshal-cdata.html?showComment=1341515783199#c822063223336777980'>July 5, 2012 at 12:16 PM</a></span></div><p id='bc_0_5MC' class='comment-content'>Nice post. But could not find out jar contains class you used:<br />com.sun.xml.internal.bind.marshaller.CharacterEscapeHandler<br /><br />Also, the compiler complains about:<br />private static class Adapter extends XmlAdapter <br /><br />Should it be like below?<br />private static class Adapter extends XmlAdapter</p><span id='bc_0_5MN' class='comment-actions secondary-text' kind='m'><a kind='i' href='javascript:;' target='_self' o='r'>Reply</a><span class='item-control blog-admin pid-189836809'><a o='d' target='_self' href='http://www.blogger.com/delete-comment.g?blogID=8023739875307409079&amp;postID=822063223336777980'>Delete</a></span></span></div><div id='bc_0_5BR' class='comment-replies'></div><div id='bc_0_5B_box' class='comment-replybox-single'></div></li><li id='bc_0_6B' class='comment' kind='b'><div class='avatar-image-container'><img src='http://img1.blogblog.com/img/anon36.png'></img></div><div id='c9084212784628192171' class='comment-block'><div id='bc_0_6M' class='comment-header' kind='m'><cite class='user'>Anonymous</cite><span class='icon user'></span><span class='datetime secondary-text'><a rel='nofollow' href='http://odedpeer.blogspot.com/2010/07/jaxb-sun-and-how-to-marshal-cdata.html?showComment=1351268172422#c9084212784628192171'>October 26, 2012 at 9:16 AM</a></span></div><p id='bc_0_6MC' class='comment-content'>Very useful thank you very much. <br />About the errors above with the CharacterEscapeHandler, plase have a look here: http://stackoverflow.com/questions/860187/access-restriction-on-class-due-to-restriction-on-required-library-rt-jar</p><span id='bc_0_6MN' class='comment-actions secondary-text' kind='m'><a kind='i' href='javascript:;' target='_self' o='r'>Reply</a><span class='item-control blog-admin pid-1379720335'><a o='d' target='_self' href='http://www.blogger.com/delete-comment.g?blogID=8023739875307409079&amp;postID=9084212784628192171'>Delete</a></span></span></div><div id='bc_0_6BR' class='comment-replies'></div><div id='bc_0_6B_box' class='comment-replybox-single'></div></li><li id='bc_0_7B' class='comment' kind='b'><div class='avatar-image-container'><img src='http://img2.blogblog.com/img/b36-rounded.png'></img></div><div id='c4586962102248548277' class='comment-block'><div id='bc_0_7M' class='comment-header' kind='m'><cite class='user'><a rel='nofollow' href='http://www.blogger.com/profile/03770297381207259923'>Dirk Dittert</a></cite><span class='icon user'></span><span class='datetime secondary-text'><a rel='nofollow' href='http://odedpeer.blogspot.com/2010/07/jaxb-sun-and-how-to-marshal-cdata.html?showComment=1357811192239#c4586962102248548277'>January 10, 2013 at 1:46 AM</a></span></div><p id='bc_0_7MC' class='comment-content'>Unfortunately, your example is broken: Your adapter does not handle CDATA end tags ]]&gt; properly. This breaks the generated XML if that string is contained in the input.<br /><br />More severely, the CharacterEscapeHandler instance turns off escaping completely for all tags. As a consequence you _must_ use CDATA tags for all members that might contain special charactes like (greater than).<br /><br />Unfortunately, there there seems to be no feasible way to conveniently use escaping for some tags and CDATA for others with your approach.<br /><br /></p><span id='bc_0_7MN' class='comment-actions secondary-text' kind='m'><a kind='i' href='javascript:;' target='_self' o='r'>Reply</a><span class='item-control blog-admin pid-231768229'><a o='d' target='_self' href='http://www.blogger.com/delete-comment.g?blogID=8023739875307409079&amp;postID=4586962102248548277'>Delete</a></span></span></div><div id='bc_0_7BR' class='comment-replies'></div><div id='bc_0_7B_box' class='comment-replybox-single'></div></li><li id='bc_0_8B' class='comment' kind='b'><div class='avatar-image-container'><img src='http://img1.blogblog.com/img/anon36.png'></img></div><div id='c5556740398651546597' class='comment-block'><div id='bc_0_8M' class='comment-header' kind='m'><cite class='user'>Anonymous</cite><span class='icon user'></span><span class='datetime secondary-text'><a rel='nofollow' href='http://odedpeer.blogspot.com/2010/07/jaxb-sun-and-how-to-marshal-cdata.html?showComment=1366204123562#c5556740398651546597'>April 17, 2013 at 6:08 AM</a></span></div><p id='bc_0_8MC' class='comment-content'>Thanks, great post. Really usefull!</p><span id='bc_0_8MN' class='comment-actions secondary-text' kind='m'><a kind='i' href='javascript:;' target='_self' o='r'>Reply</a><span class='item-control blog-admin pid-711592853'><a o='d' target='_self' href='http://www.blogger.com/delete-comment.g?blogID=8023739875307409079&amp;postID=5556740398651546597'>Delete</a></span></span></div><div id='bc_0_8BR' class='comment-replies'></div><div id='bc_0_8B_box' class='comment-replybox-single'></div></li></ol><div id='bc_0_9I' class='continue' kind='ci'><a href='javascript:;' target='_self'>Add comment</a></div><div id='bc_0_9T_box' class='comment-replybox-thread'></div><div id='bc_0_9L' class='loadmore loaded' kind='rb'><a href='javascript:;' target='_self'>Load more...</a></div></div></div></div>
+</div>
+</div>
+<p class='comment-footer'>
+<div class='comment-form'>
+<a name='comment-form'></a>
+<p>
+</p>
+<a href='https://www.blogger.com/comment-iframe.g?blogID=8023739875307409079&postID=8070129071131488886' id='comment-editor-src'></a>
+<iframe allowtransparency='true' class='blogger-iframe-colorize blogger-comment-from-post' frameborder='0' height='410' id='comment-editor' name='comment-editor' src='' width='100%'></iframe>
+<script type="text/javascript" src="https://www.blogger.com/static/v1/jsbin/3995214906-comment_from_post_iframe.js"></script>
+<script type='text/javascript'>
+      BLOG_CMT_createIframe('https://www.blogger.com/rpc_relay.html');
+    </script>
+</div>
+</p>
+<div id='backlinks-container'>
+<div id='Blog1_backlinks-container'>
+<a name='links'></a><h4>
+</h4>
+<p class='comment-footer'>
+<a class='comment-link' href='' id='Blog1_backlinks-create-link' target='_blank'>
+</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+
+        </div></div>
+      
+<!-- google_ad_section_end -->
+</div>
+<div class='blog-pager' id='blog-pager'>
+<span id='blog-pager-newer-link'>
+<a class='blog-pager-newer-link' href='http://odedpeer.blogspot.com/2010/07/running-play-framework-jpa-from-command.html' id='Blog1_blog-pager-newer-link' title='Newer Post'>Newer Post</a>
+</span>
+<span id='blog-pager-older-link'>
+<a class='blog-pager-older-link' href='http://odedpeer.blogspot.com/2010/05/using-play-precompiled-classes.html' id='Blog1_blog-pager-older-link' title='Older Post'>Older Post</a>
+</span>
+<a class='home-link' href='http://odedpeer.blogspot.com/'>Home</a>
+</div>
+<div class='clear'></div>
+<div class='post-feeds'>
+<div class='feed-links'>
+Subscribe to:
+<a class='feed-link' href='http://odedpeer.blogspot.com/feeds/8070129071131488886/comments/default' target='_blank' type='application/atom+xml'>Post Comments (Atom)</a>
+</div>
+</div>
+<script type="text/javascript">window.___gcfg = {'lang': 'en'};</script>
+</div></div>
+</div>
+<div id='sidebar-wrapper'>
+<script language='javascript' src='http://widgets.dzone.com/links/widgets/zoneit.js'></script>
+<br/><br/>
+<a class='twitter-share-button' data-size='large' data-via='odpeer' href='https://twitter.com/share'>Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+<div class='sidebar section' id='sidebar'><div class='widget Followers' id='Followers1'>
+<h2 class='title'>Followers</h2>
+<div class='widget-content'>
+<div id='Followers1-wrapper'>
+<div style='margin-right:2px;'>
+<script type="text/javascript">
+        if (!window.google || !google.friendconnect) {
+          document.write('<script type="text/javascript"' +
+              'src="//www.google.com/friendconnect/script/friendconnect.js">' +
+              '</scr' + 'ipt>');
+        }
+      </script>
+<script type="text/javascript">
+      if (!window.registeredBloggerCallbacks) {
+        window.registeredBloggerCallbacks = true;
+
+        
+
+        
+        gadgets.rpc.register('requestReload', function() {
+          document.location.reload();
+        });
+
+        
+        gadgets.rpc.register('requestSignOut', function(siteId) {
+          
+          google.friendconnect.container.openSocialSiteId = siteId;
+          google.friendconnect.requestSignOut();
+        });
+      }
+    </script>
+<script type="text/javascript">
+    
+    function registerGetBlogUrls() {
+      gadgets.rpc.register('getBlogUrls', function() {
+        var holder = {};
+        
+          
+            
+            
+              holder.currentPost = "http://www.blogger.com/feeds/8023739875307409079/posts/default/8070129071131488886";
+            
+            
+            
+              holder.currentComments = "http://www.blogger.com/feeds/8023739875307409079/8070129071131488886/comments/default";
+            
+            holder.currentPostUrl = "";
+            holder.currentPostId = 8070129071131488886
+          
+          
+          
+            holder.postFeed = "http://www.blogger.com/feeds/8023739875307409079/posts/default";
+          
+          
+          
+            holder.commentFeed = "http://www.blogger.com/feeds/8023739875307409079/comments/default";
+          
+          holder.currentBlogUrl = "http://odedpeer.blogspot.com/";
+          holder.currentBlogId = "8023739875307409079";
+        
+        return holder;
+      });
+    }
+  </script>
+<script type="text/javascript">
+  if (!window.registeredCommonBloggerCallbacks) {
+    window.registeredCommonBloggerCallbacks = true;
+
+    gadgets.rpc.register('resize_iframe', function(height) {
+      var el = document.getElementById(this['f']);
+      if (el) {
+        el.style.height = height + 'px';
+      }
+    });
+
+    
+    gadgets.rpc.register('set_pref', function() {});
+
+    registerGetBlogUrls();
+  }
+  </script>
+<div id="div-z6u7sfjbnyxc" style="width: 100%; "></div>
+<script type="text/javascript">
+    var skin = {};
+    skin['FACE_SIZE'] = '32';
+    skin['HEIGHT'] = "260";
+    skin['TITLE'] = "Followers";
+    skin['BORDER_COLOR'] = "transparent";
+    skin['ENDCAP_BG_COLOR'] = "transparent";
+    skin['ENDCAP_TEXT_COLOR'] = "#666666";
+    skin['ENDCAP_LINK_COLOR'] = "#5588aa";
+    skin['ALTERNATE_BG_COLOR'] = "transparent";
+    
+    skin['CONTENT_BG_COLOR'] = "transparent";
+    skin['CONTENT_LINK_COLOR'] = "#5588aa";
+    skin['CONTENT_TEXT_COLOR'] = "#666666";
+    skin['CONTENT_SECONDARY_LINK_COLOR'] = "#5588aa";
+    skin['CONTENT_SECONDARY_TEXT_COLOR'] = "#999999";
+    skin['CONTENT_HEADLINE_COLOR'] = "#cc6600";
+    skin['FONT_FACE'] = "normal normal 100% Georgia, Serif";
+    google.friendconnect.container.setParentUrl("/");
+    google.friendconnect.container["renderMembersGadget"](
+    {id: "div-z6u7sfjbnyxc",
+     height: 260,
+     
+     
+     
+     site: "12507055358005361520",
+     
+     locale: 'en' },
+     skin);
+  </script>
+</div>
+</div>
+<div class='clear'></div>
+<span class='widget-item-control'>
+<span class='item-control blog-admin'>
+<a class='quickedit' href='//www.blogger.com/rearrange?blogID=8023739875307409079&widgetType=Followers&widgetId=Followers1&action=editWidget&sectionId=sidebar' onclick='return _WidgetManager._PopupConfig(document.getElementById("Followers1"));' target='configFollowers1' title='Edit'>
+<img alt='' height='18' src='http://img1.blogblog.com/img/icon18_wrench_allbkg.png' width='18'/>
+</a>
+</span>
+</span>
+<div class='clear'></div>
+</div>
+</div><div class='widget BlogArchive' id='BlogArchive1'>
+<h2>Blog Archive</h2>
+<div class='widget-content'>
+<div id='ArchiveList'>
+<div id='BlogArchive1_ArchiveList'>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+          &#9658;&#160;
+        
+</span>
+</a>
+<a class='post-count-link' href='http://odedpeer.blogspot.com/search?updated-min=2014-01-01T00:00:00-08:00&amp;updated-max=2015-01-01T00:00:00-08:00&amp;max-results=1'>2014</a>
+<span class='post-count' dir='ltr'>(1)</span>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+          &#9658;&#160;
+        
+</span>
+</a>
+<a class='post-count-link' href='http://odedpeer.blogspot.com/2014_02_01_archive.html'>February</a>
+<span class='post-count' dir='ltr'>(1)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+          &#9658;&#160;
+        
+</span>
+</a>
+<a class='post-count-link' href='http://odedpeer.blogspot.com/search?updated-min=2013-01-01T00:00:00-08:00&amp;updated-max=2014-01-01T00:00:00-08:00&amp;max-results=1'>2013</a>
+<span class='post-count' dir='ltr'>(1)</span>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+          &#9658;&#160;
+        
+</span>
+</a>
+<a class='post-count-link' href='http://odedpeer.blogspot.com/2013_07_01_archive.html'>July</a>
+<span class='post-count' dir='ltr'>(1)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+          &#9658;&#160;
+        
+</span>
+</a>
+<a class='post-count-link' href='http://odedpeer.blogspot.com/search?updated-min=2012-01-01T00:00:00-08:00&amp;updated-max=2013-01-01T00:00:00-08:00&amp;max-results=3'>2012</a>
+<span class='post-count' dir='ltr'>(3)</span>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+          &#9658;&#160;
+        
+</span>
+</a>
+<a class='post-count-link' href='http://odedpeer.blogspot.com/2012_06_01_archive.html'>June</a>
+<span class='post-count' dir='ltr'>(1)</span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+          &#9658;&#160;
+        
+</span>
+</a>
+<a class='post-count-link' href='http://odedpeer.blogspot.com/2012_03_01_archive.html'>March</a>
+<span class='post-count' dir='ltr'>(1)</span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+          &#9658;&#160;
+        
+</span>
+</a>
+<a class='post-count-link' href='http://odedpeer.blogspot.com/2012_02_01_archive.html'>February</a>
+<span class='post-count' dir='ltr'>(1)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+          &#9658;&#160;
+        
+</span>
+</a>
+<a class='post-count-link' href='http://odedpeer.blogspot.com/search?updated-min=2011-01-01T00:00:00-08:00&amp;updated-max=2012-01-01T00:00:00-08:00&amp;max-results=2'>2011</a>
+<span class='post-count' dir='ltr'>(2)</span>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+          &#9658;&#160;
+        
+</span>
+</a>
+<a class='post-count-link' href='http://odedpeer.blogspot.com/2011_11_01_archive.html'>November</a>
+<span class='post-count' dir='ltr'>(1)</span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+          &#9658;&#160;
+        
+</span>
+</a>
+<a class='post-count-link' href='http://odedpeer.blogspot.com/2011_02_01_archive.html'>February</a>
+<span class='post-count' dir='ltr'>(1)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate expanded'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy toggle-open'>&#9660;&#160;</span>
+</a>
+<a class='post-count-link' href='http://odedpeer.blogspot.com/search?updated-min=2010-01-01T00:00:00-08:00&amp;updated-max=2011-01-01T00:00:00-08:00&amp;max-results=10'>2010</a>
+<span class='post-count' dir='ltr'>(10)</span>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+          &#9658;&#160;
+        
+</span>
+</a>
+<a class='post-count-link' href='http://odedpeer.blogspot.com/2010_11_01_archive.html'>November</a>
+<span class='post-count' dir='ltr'>(1)</span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate expanded'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy toggle-open'>&#9660;&#160;</span>
+</a>
+<a class='post-count-link' href='http://odedpeer.blogspot.com/2010_07_01_archive.html'>July</a>
+<span class='post-count' dir='ltr'>(2)</span>
+<ul class='posts'>
+<li><a href='http://odedpeer.blogspot.com/2010/07/running-play-framework-jpa-from-command.html'>Running Play! framework JPA from a command line pr...</a></li>
+<li><a href='http://odedpeer.blogspot.com/2010/07/jaxb-sun-and-how-to-marshal-cdata.html'>JAXB, Sun and how to marshal a CDATA element</a></li>
+</ul>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+          &#9658;&#160;
+        
+</span>
+</a>
+<a class='post-count-link' href='http://odedpeer.blogspot.com/2010_05_01_archive.html'>May</a>
+<span class='post-count' dir='ltr'>(2)</span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+          &#9658;&#160;
+        
+</span>
+</a>
+<a class='post-count-link' href='http://odedpeer.blogspot.com/2010_04_01_archive.html'>April</a>
+<span class='post-count' dir='ltr'>(1)</span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+          &#9658;&#160;
+        
+</span>
+</a>
+<a class='post-count-link' href='http://odedpeer.blogspot.com/2010_03_01_archive.html'>March</a>
+<span class='post-count' dir='ltr'>(3)</span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+          &#9658;&#160;
+        
+</span>
+</a>
+<a class='post-count-link' href='http://odedpeer.blogspot.com/2010_02_01_archive.html'>February</a>
+<span class='post-count' dir='ltr'>(1)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+          &#9658;&#160;
+        
+</span>
+</a>
+<a class='post-count-link' href='http://odedpeer.blogspot.com/search?updated-min=2009-01-01T00:00:00-08:00&amp;updated-max=2010-01-01T00:00:00-08:00&amp;max-results=4'>2009</a>
+<span class='post-count' dir='ltr'>(4)</span>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+          &#9658;&#160;
+        
+</span>
+</a>
+<a class='post-count-link' href='http://odedpeer.blogspot.com/2009_12_01_archive.html'>December</a>
+<span class='post-count' dir='ltr'>(1)</span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+          &#9658;&#160;
+        
+</span>
+</a>
+<a class='post-count-link' href='http://odedpeer.blogspot.com/2009_11_01_archive.html'>November</a>
+<span class='post-count' dir='ltr'>(1)</span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+          &#9658;&#160;
+        
+</span>
+</a>
+<a class='post-count-link' href='http://odedpeer.blogspot.com/2009_10_01_archive.html'>October</a>
+<span class='post-count' dir='ltr'>(1)</span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+          &#9658;&#160;
+        
+</span>
+</a>
+<a class='post-count-link' href='http://odedpeer.blogspot.com/2009_08_01_archive.html'>August</a>
+<span class='post-count' dir='ltr'>(1)</span>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class='clear'></div>
+<span class='widget-item-control'>
+<span class='item-control blog-admin'>
+<a class='quickedit' href='//www.blogger.com/rearrange?blogID=8023739875307409079&widgetType=BlogArchive&widgetId=BlogArchive1&action=editWidget&sectionId=sidebar' onclick='return _WidgetManager._PopupConfig(document.getElementById("BlogArchive1"));' target='configBlogArchive1' title='Edit'>
+<img alt='' height='18' src='http://img1.blogblog.com/img/icon18_wrench_allbkg.png' width='18'/>
+</a>
+</span>
+</span>
+<div class='clear'></div>
+</div>
+</div><div class='widget Profile' id='Profile1'>
+<h2>About Me</h2>
+<div class='widget-content'>
+<dl class='profile-datablock'>
+<dt class='profile-data'>
+<a class='profile-name-link g-profile' href='http://www.blogger.com/profile/13092888750242228106' rel='author' style='background-image: url(//www.blogger.com/img/logo-16.png);'>
+Oded Peer
+</a>
+</dt>
+<dd class='profile-textblock'>Java enthusiast, Basketball fan, Aspiring baker</dd>
+</dl>
+<a class='profile-link' href='http://www.blogger.com/profile/13092888750242228106' rel='author'>View my complete profile</a>
+<div class='clear'></div>
+<span class='widget-item-control'>
+<span class='item-control blog-admin'>
+<a class='quickedit' href='//www.blogger.com/rearrange?blogID=8023739875307409079&widgetType=Profile&widgetId=Profile1&action=editWidget&sectionId=sidebar' onclick='return _WidgetManager._PopupConfig(document.getElementById("Profile1"));' target='configProfile1' title='Edit'>
+<img alt='' height='18' src='http://img1.blogblog.com/img/icon18_wrench_allbkg.png' width='18'/>
+</a>
+</span>
+</span>
+<div class='clear'></div>
+</div>
+</div></div>
+</div>
+<!-- spacer for skins that want sidebar and main to be the same height-->
+<div class='clear'>&#160;</div>
+</div>
+<!-- end content-wrapper -->
+<div id='footer-wrapper'>
+<div class='footer section' id='footer'></div>
+</div>
+</div></div>
+<!-- end outer-wrapper -->
+<script language='javascript'>
+dp.SyntaxHighlighter.ClipboardSwf = 'http://dl.dropbox.com/u/4926152/dp.SyntaxHighlighter/Uncompressed/clipboard.swf';
+dp.SyntaxHighlighter.HighlightAll('code');
+</script>
+<script type='text/javascript'>
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type='text/javascript'>
+try {
+var pageTracker = _gat._getTracker("UA-15388197-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+<script type="text/javascript">
+if (window.jstiming) window.jstiming.load.tick('widgetJsBefore');
+</script><script type="text/javascript" src="https://www.blogger.com/static/v1/widgets/2885176887-widgets.js"></script>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+<script type='text/javascript'>
+if (typeof(BLOG_attachCsiOnload) != 'undefined' && BLOG_attachCsiOnload != null) { window['blogger_templates_experiment_id'] = "templatesV1";window['blogger_blog_id'] = '8023739875307409079';BLOG_attachCsiOnload('item_'); }_WidgetManager._Init('//www.blogger.com/rearrange?blogID\x3d8023739875307409079','//odedpeer.blogspot.com/2010/07/jaxb-sun-and-how-to-marshal-cdata.html','8023739875307409079');
+_WidgetManager._SetDataContext([{'name': 'blog', 'data': {'blogId': '8023739875307409079', 'bloggerUrl': 'http://www.blogger.com', 'title': 'Technical stuff', 'pageType': 'item', 'postId': '8070129071131488886', 'url': 'http://odedpeer.blogspot.com/2010/07/jaxb-sun-and-how-to-marshal-cdata.html', 'canonicalUrl': 'http://odedpeer.blogspot.com/2010/07/jaxb-sun-and-how-to-marshal-cdata.html', 'canonicalHomepageUrl': 'http://odedpeer.blogspot.com/', 'homepageUrl': 'http://odedpeer.blogspot.com/', 'blogspotFaviconUrl': 'http://odedpeer.blogspot.com/favicon.ico', 'enabledCommentProfileImages': true, 'adultContent': false, 'disableAdSenseWidget': false, 'analyticsAccountNumber': '', 'searchLabel': '', 'searchQuery': '', 'pageName': 'JAXB, Sun and how to marshal a CDATA element', 'pageTitle': 'Technical stuff: JAXB, Sun and how to marshal a CDATA element', 'encoding': 'UTF-8', 'locale': 'en', 'localeUnderscoreDelimited': 'en', 'isPrivate': false, 'isMobile': false, 'isMobileRequest': false, 'mobileClass': '', 'isPrivateBlog': false, 'languageDirection': 'ltr', 'feedLinks': '\74link rel\75\42alternate\42 type\75\42application/atom+xml\42 title\75\42Technical stuff - Atom\42 href\75\42http://odedpeer.blogspot.com/feeds/posts/default\42 /\76\n\74link rel\75\42alternate\42 type\75\42application/rss+xml\42 title\75\42Technical stuff - RSS\42 href\75\42http://odedpeer.blogspot.com/feeds/posts/default?alt\75rss\42 /\76\n\74link rel\75\42service.post\42 type\75\42application/atom+xml\42 title\75\42Technical stuff - Atom\42 href\75\42http://www.blogger.com/feeds/8023739875307409079/posts/default\42 /\76\n\n\74link rel\75\42alternate\42 type\75\42application/atom+xml\42 title\75\42Technical stuff - Atom\42 href\75\42http://odedpeer.blogspot.com/feeds/8070129071131488886/comments/default\42 /\76\n', 'meTag': '', 'openIdOpTag': '', 'latencyHeadScript': '\74script type\75\42text/javascript\42\76(function() { var b\75window,f\75\42chrome\42,g\75\42tick\42,k\75\42jstiming\42;(function(){function d(a){this.t\75{};this.tick\75function(a,d,c){var e\75void 0!\75c?c:(new Date).getTime();this.t[a]\75[e,d];if(void 0\75\75c)try{b.console.timeStamp(\42CSI/\42+a)}catch(h){}};this[g](\42start\42,null,a)}var a;b.performance\46\46(a\75b.performance.timing);var n\75a?new d(a.responseStart):new d;b.jstiming\75{Timer:d,load:n};if(a){var c\75a.navigationStart,h\75a.responseStart;0\74c\46\46h\76\75c\46\46(b[k].srt\75h-c)}if(a){var e\75b[k].load;0\74c\46\46h\76\75c\46\46(e[g](\42_wtsrt\42,void 0,c),e[g](\42wtsrt_\42,\42_wtsrt\42,h),e[g](\42tbsd_\42,\42wtsrt_\42))}try{a\75null,\nb[f]\46\46b[f].csi\46\46(a\75Math.floor(b[f].csi().pageT),e\46\0460\74c\46\46(e[g](\42_tbnd\42,void 0,b[f].csi().startE),e[g](\42tbnd_\42,\42_tbnd\42,c))),null\75\75a\46\46b.gtbExternal\46\46(a\75b.gtbExternal.pageT()),null\75\75a\46\46b.external\46\46(a\75b.external.pageT,e\46\0460\74c\46\46(e[g](\42_tbnd\42,void 0,b.external.startE),e[g](\42tbnd_\42,\42_tbnd\42,c))),a\46\46(b[k].pt\75a)}catch(p){}})();b.tickAboveFold\75function(d){var a\0750;if(d.offsetParent){do a+\75d.offsetTop;while(d\75d.offsetParent)}d\75a;750\76\75d\46\46b[k].load[g](\42aft\42)};var l\75!1;function m(){l||(l\75!0,b[k].load[g](\42firstScrollTime\42))}b.addEventListener?b.addEventListener(\42scroll\42,m,!1):b.attachEvent(\42onscroll\42,m);\n })();\74/script\076', 'mobileHeadScript': '', 'view': '', 'dynamicViewsCommentsSrc': '//www.blogblog.com/dynamicviews/4224c15c4e7c9321/js/comments.js', 'dynamicViewsScriptSrc': '//www.blogblog.com/dynamicviews/76f25a6f2e06af76', 'plusOneApiSrc': 'https://apis.google.com/js/plusone.js', 'sf': 'n', 'tf': ''}}, {'name': 'skin', 'data': {'vars': {'sidebartextcolor': '#666666', 'linkcolor': '#5588aa', 'visitedlinkcolor': '#999999', 'textcolor': '#333333', 'headerfont': 'normal normal 78% \47Trebuchet MS\47,Trebuchet,Arial,Verdana,Sans-serif', 'pagetitlefont': 'normal normal 200% Georgia, Serif', 'bgcolor': '#ffffff', 'descriptioncolor': '#999999', 'titlecolor': '#cc6600', 'bordercolor': '#cccccc', 'postfooterfont': 'normal normal 78% \47Trebuchet MS\47, Trebuchet, Arial, Verdana, Sans-serif', 'pagetitlecolor': '#666666', 'bodyfont': 'normal normal 100% Georgia, Serif', 'endSide': 'right', 'startSide': 'left', 'descriptionfont': 'normal normal 78% \47Trebuchet MS\47, Trebuchet, Arial, Verdana, Sans-serif', 'sidebarcolor': '#999999'}, 'override': ''}}, {'name': 'view', 'data': {'classic': {'name': 'classic', 'url': '?view\75classic'}, 'flipcard': {'name': 'flipcard', 'url': '?view\75flipcard'}, 'magazine': {'name': 'magazine', 'url': '?view\75magazine'}, 'mosaic': {'name': 'mosaic', 'url': '?view\75mosaic'}, 'sidebar': {'name': 'sidebar', 'url': '?view\75sidebar'}, 'snapshot': {'name': 'snapshot', 'url': '?view\75snapshot'}, 'timeslide': {'name': 'timeslide', 'url': '?view\75timeslide'}}}]);
+_WidgetManager._RegisterWidget('_FollowersView', new _WidgetInfo('Followers1', 'sidebar', null, document.getElementById('Followers1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogArchiveView', new _WidgetInfo('BlogArchive1', 'sidebar', null, document.getElementById('BlogArchive1'), {'languageDirection': 'ltr'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_ProfileView', new _WidgetInfo('Profile1', 'sidebar', null, document.getElementById('Profile1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HeaderView', new _WidgetInfo('Header1', 'header', null, document.getElementById('Header1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_NavbarView', new _WidgetInfo('Navbar1', 'navbar', null, document.getElementById('Navbar1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogView', new _WidgetInfo('Blog1', 'main', null, document.getElementById('Blog1'), {'cmtInteractionsEnabled': false, 'showBacklinks': true, 'postId': '8070129071131488886', 'lightboxEnabled': true, 'lightboxModuleUrl': 'https://www.blogger.com/static/v1/jsbin/2665014583-lbx.js', 'lightboxCssUrl': 'https://www.blogger.com/static/v1/v-css/2392111094-lightbox_bundle.css'}, 'displayModeFull'));
+</script>
+</body>
+</html>
